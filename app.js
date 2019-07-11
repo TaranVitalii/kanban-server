@@ -1,5 +1,6 @@
 const {getCards, getCardForId, addCards, updateCard, removeCard } = require('./utill/cardsUtill.js');
 const getColumns = require('./utill/columnsUtill.js').getColumns;
+const postColumns = require('./utill/columnsUtill.js').postColumns;
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -24,6 +25,6 @@ app.delete('/api/card/:id', removeCard);
 
 //method for column
 app.get('/api/column', getColumns);
-
+app.post('/api/column', postColumns)
 
 module.exports = app;

@@ -18,19 +18,21 @@ async getCardForId(req, res) {
 },
 //add card new card in .json
 async addCards(req, res) {
-	const name = req.body.name;
-	const columnId = req.body.columnId;
+	console.log(req.body)
+	const title = req.body.title;
+	const column = req.body.column;
 
 	const card = await CardsModel.create({
-		name,
-		columnId
+		title,
+		column
 	})
 	return res.status(200).send(card)
 },
 async updateCard(req,res){
-	const id = req.params.id;
+	const id = req.params._id;
   	const patch = req.body;
-
+  	console.log(patch)
+  	console.log(req.params)
   	const update = await CardsModel.findByIdAndUpdate(id,patch,(err,card)=>{
   		if(err) return err;
   		return card;
@@ -41,10 +43,10 @@ async updateCard(req,res){
 async removeCard(req,res){
 	const { id } = req.params;
 
-	const remove = await CardsMode.findByIdAndRemove(id,(err,card)=>{
+	const remove = await CardsModel.findByIdAndRemove(id,(err,card)=>{
 		if(err) return err;
 		return card;
 	});
-	return res.status(200)
+	return res.status(200).send('card remove');
   
 }}
