@@ -31,14 +31,14 @@ async addCards(req, res) {
 async updateCard(req,res){
 	const id = req.params._id;
   	const patch = req.body;
-  	console.log(patch)
-  	console.log(req.params)
+  	console.log(patch, 'patch')
+  	console.log(req.params, 'params')
   	const update = await CardsModel.findByIdAndUpdate(id,patch,(err,card)=>{
   		if(err) return err;
   		return card;
   	})
 
-  	return res.status(200).send(card);
+  	return res.status(200).send(update);
 },
 async removeCard(req,res){
 	const { id } = req.params;
