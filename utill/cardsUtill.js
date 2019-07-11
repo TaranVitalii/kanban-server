@@ -29,10 +29,8 @@ async addCards(req, res) {
 	return res.status(200).send(card)
 },
 async updateCard(req,res){
-	const id = req.params._id;
+	const id = req.params.id;
   	const patch = req.body;
-  	console.log(patch, 'patch')
-  	console.log(req.params, 'params')
   	const update = await CardsModel.findByIdAndUpdate(id,patch,(err,card)=>{
   		if(err) return err;
   		return card;
