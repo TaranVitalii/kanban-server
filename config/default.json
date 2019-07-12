@@ -1,0 +1,6 @@
+{
+
+	"DataBase":{
+		"host":"mongodb://localhost/kanban"
+	}
+}
