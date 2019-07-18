@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const CardsSchema = new Schema({
-	id: Schema.ObjectId , 
+const CardsSchema = new Schema({ 
 	title:String,
 	column:Number,
 	 __v: {
