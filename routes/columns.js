@@ -1,11 +1,9 @@
-const ColumnsModel = require('../models/column.js');
-
-
+const {getColumnsModel,postColumnsModel} = require('./repository/columnsRepository.js');
 
 module.exports = {
 	async getColumns(req, res) {
 	try{
-	const columns = await ColumnsModel.find({},(err, columns) => columns)
+	const columns = await getColumnsModel();
 	return res.status(200).send(columns)
 	}catch(e){ res.status(500).send(e.message)}
 
@@ -14,8 +12,8 @@ module.exports = {
 		try{
 		const title = req.body.title;
 		const id = req.body.id;
-		const columns = await ColumnsModel.create({title,id})
-		return res.status(200).send(columns)
+		const column = await postColumnsModel(title,id);
+		return res.status(200).send(column)
 		}catch(e){ res.status(500).send(e.message)}
 	}
 }
