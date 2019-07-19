@@ -24,12 +24,12 @@ UserSchema
   .set(function(password) {
     if (password !== undefined) {
       if (password.length < 6) {
-        this.invalidate("password", "Пароль должен быть минимум 4 символа.");
+        this.invalidate("password", "Пароль должен быть минимум 6 символа.");
       }
     }
 
     this._plainPassword = password;
-
+    
     if (password) {
       this.salt = crypto
         .randomBytes(config.crypto.hash.length)
@@ -52,6 +52,7 @@ UserSchema
   });
 
  UserSchema.methods.checkPassword = function(password) {
+  console.log('checkPassword',password);
   if (!password) return false; // empty password means no login by password
   if (!this.passwordHash) return false; // this user does not have password (the line below would hang!)
 

@@ -4,11 +4,14 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const passport = require("passport");
+const path = require('path');
 const {getCards, getCardForId, addCards, updateCard, removeCard } = require('./routes/cards.js');
 const {getColumns , postColumns } = require('./routes/columns.js');
 const signIn = require('./routes/auth.js');
 const register = require('./routes/registr.js');
 const myPasport = require('./passport/myPassport.js');
+const router = require('./apiRouter.js');
+
 
 // Use body-parser to get POST requests for API use
 app.use(
@@ -18,6 +21,7 @@ app.use(
 );
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 // Log requests to console
 app.use(morgan('dev'));
@@ -37,6 +41,7 @@ app.post('/api/column', postColumns)
 app.post('/api/signin',signIn);
 app.post('/api/register',register);
 
+app.use('/api/', router);
 module.exports = app;
 
 

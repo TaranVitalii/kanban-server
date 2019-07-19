@@ -1,7 +1,7 @@
 const passport = require("passport");
 
 require("./serialize");
-require("./localStrategy");
+// require("./localStrategy");
 require("./jwtStrategy");
 
 module.exports = passport;
