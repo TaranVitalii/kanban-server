@@ -21,8 +21,10 @@ app.use(
 );
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/api/signin",express.static(path.join(__dirname +"/public/auth.html")));
+
 app.use(passport.initialize());
+console.log(passport.initialize());
 // Log requests to console
 app.use(morgan('dev'));
 
@@ -41,7 +43,7 @@ app.post('/api/column', postColumns)
 app.post('/api/signin',signIn);
 app.post('/api/register',register);
 
-app.use('/api/', router);
+// app.use('/api/', router);
 module.exports = app;
 
 
