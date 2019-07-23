@@ -5,7 +5,6 @@ const User = mongoose.model('UserSchema');
 const config = require('config');
 
 async function signIn(req,res){
-	console.log(req.body)
 	const {username , password} = req.body;
     console.log(req.isAuthenticated());
 	if (!username || !password) {
