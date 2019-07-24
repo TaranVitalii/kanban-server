@@ -13,7 +13,7 @@ const signIn = require('./routes/auth.js');
 const register = require('./routes/registr.js');
 const myPasport = require('./passport/myPassport.js');
 const router = require('./apiRouter.js');
-// const updateCardWS = require('./routes/repository/cardsRepository.js');
+const updateCardWS = require('./routes/repository/updateWS.js')
 
 // Use body-parser to get POST requests for API use
 app.use(
@@ -36,18 +36,13 @@ app.post('/api/register',register);
 // app.use('/', router);
 io.on('connection', function(socket){
 	console.log('made socket connection');
-	socket.on("move", function(data){
-	const { cardId , editColumn} = data;		
-	async function updateCardWS(cardId,editColumn){
-		const update = await CardsModel.findByIdAndUpdate(id,patch,(err,card)=>{
-  		if(err) return err;
-  		return card;
-  		})
-  		console.log(update)
-		return update;
-	}
-	})
+	socket.on("move",async function(data){
+		const { cardIdTarget, editorColumnId } = data;
+
+		const update = await updateCardWS(cardIdTarget, editorColumnId);
+		socket.broadcast.emit("move",console.log(update));
 	});
+});
 //method for cards
 app.get('/api/card', getCards );
 app.get('/api/card/:id', getCardForId );
