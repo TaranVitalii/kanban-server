@@ -29,10 +29,15 @@ module.exports = {
 		return update;
 	},
 	async removeCard(id){
+		const card = await CardsModel.findById(id,(err,card)=>{
+			if(err) return err;
+			return card
+		})
 		const remove = await CardsModel.findByIdAndRemove(id,(err,card)=>{
 			if(err) return err;
 			return card;
 		});
-		return remove;
+
+		return {remove , card} ;
 	}
 }

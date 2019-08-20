@@ -12,11 +12,11 @@ module.exports ={//return array cards from .json
 //return card with search id
 	async getCardForId(req, res) {
 		try{ 
-			if(req.isAuthenticated()){
+			// if(req.isAuthenticated()){
 			const id = req.params.id;
 			const card = await getCardForIdModel(id);
 				return res.status(200).send(card)
-			}else{res.status(404).send('Unauthorized')}
+			// }else{res.status(404).send('Unauthorized')}
 
 		}catch(e){ res.status(500).send(e.message)}
 
@@ -46,8 +46,8 @@ module.exports ={//return array cards from .json
 		try{ 
 			// if(req.isAuthenticated()){
 			const { id } = req.params;
-			const remove = await removeCard(id);
-				return res.status(200).send('card remove');
+			const {card} = await removeCard(id);
+				return res.status(200).send(card);
 			// }else{res.status(404).send('Unauthorized')}
 		}catch(e){ res.status(500).send(e.message)}
 	}
