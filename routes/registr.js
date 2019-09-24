@@ -6,19 +6,17 @@ const User = mongoose.model('UserSchema');
 
 async function register(req, res) {
   const { username, password,  } = req.body;
-  console.log(req.body)
-  if (!username || !password) {
-    return res.sendStatus(400);
-  }
+    if (!username || !password) {
+      return res.sendStatus(400);
+    }
 
   try {
     let user = await User.findOne({ username });
-    console.log(user)
-    if (user) {
-      return res.sendStatus(400, "User already exists");
-    }
+      if (user) {
+        return res.status(404).send("User already exists");
+      }
     user = await User.create({ username, password });
-    return res.send(user.getPublicFields());
+      return res.send(user.getPublicFields());
   } catch (e) {
     console.error(e);
     return res.sendStatus(500);
