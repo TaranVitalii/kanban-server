@@ -37,7 +37,6 @@ module.exports = {
 			if(err) return err;
 			return card;
 		});
-
 		return {remove , card} ;
 	}
 }
